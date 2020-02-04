@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AutoOpenTextPatch.h" />
+    <ClInclude Include="AutoRunPatch.h" />
+    <ClInclude Include="FlashManager.h" />
+    <ClInclude Include="FlashOnMessagePatch.h" />
+    <ClInclude Include="FramecapPatch.h" />
+    <ClInclude Include="LargeAddressAwarePatch.h" />
+    <ClInclude Include="mswsock.h" />
+    <ClInclude Include="NumpadTypePatch.h" />
+    <ClInclude Include="Patch.h" />
+    <ClInclude Include="PatchManager.h" />
+    <ClInclude Include="PatternFinder.h" />
+    <ClInclude Include="XButtonDoubleClickPatch.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AutoOpenTextPatch.cpp" />
+    <ClCompile Include="AutoRunPatch.cpp" />
+    <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="FlashManager.cpp" />
+    <ClCompile Include="FlashOnMessagePatch.cpp" />
+    <ClCompile Include="FramecapPatch.cpp" />
+    <ClCompile Include="LargeAddressAwarePatch.cpp" />
+    <ClCompile Include="mswsock.cpp" />
+    <ClCompile Include="NumpadTypePatch.cpp" />
+    <ClCompile Include="Patch.cpp" />
+    <ClCompile Include="PatchManager.cpp" />
+    <ClCompile Include="PatternFinder.cpp" />
+    <ClCompile Include="XButtonDoubleClickPatch.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Exports.def" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <VcpkgTriplet Condition="'$(Platform)'=='Win32'">x86-windows-static</VcpkgTriplet>
+    <ProjectGuid>{22FA60B4-97D0-4206-B958-15FD55551447}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>AOPP</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <TargetName>mswsock</TargetName>
+    <LibraryPath>C:\polyhook\PolyHook_2_0\build32\Release;C:\polyhook\PolyHook_2_0\build32\capstone\Release;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\polyhook\PolyHook_2_0;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;AOPP_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+      <AdditionalDependencies>shlwapi.lib;capstone.lib;PolyHook_2.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ModuleDefinitionFile>Exports.def</ModuleDefinitionFile>
+      <MapExports>true</MapExports>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
