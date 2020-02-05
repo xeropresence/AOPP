@@ -94,7 +94,7 @@ struct IncomingMessage
 public:
 	char pad_0000[12]; //0x0000
 	char Sender[28]; //0x000C
-	char* Message; //0x0028
+	std::string Message; //0x0028
 };
 
 
@@ -149,7 +149,7 @@ __declspec(noinline) static void  __fastcall privmessagefunc(int a1, void* EDX, 
 	if (icompare(lastMessageTarget ,a2->Sender))
 	{
 		lastMessageTarget = "";
-		GumboOutput* output = gumbo_parse(a2->Message);
+		GumboOutput* output = gumbo_parse(a2->Message.c_str());
 		search_for_links(output->root, 0);
 		gumbo_destroy_output(&kGumboDefaultOptions, output);
 	}
