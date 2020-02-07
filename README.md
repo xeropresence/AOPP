@@ -79,12 +79,15 @@ These instructions are only relevant to you if you want to modify the plugin. To
 
 * Install Visual Studio 2019 (earlier versions might work as well but haven't been tested) 
 * Checkout source codes with git, or download source code as ZIP and extract.
-* Compile polyhook2 (https://github.com/stevemk14ebr/PolyHook_2_0) as a static library
-* Add polyhook2 include and lib directories to the vc++ folders of the project settings
-* Use `vckpg install gumbo:x86-windows-static`
+* Use vcpkg (https://github.com/microsoft/vcpkg) to install the required libraries
+```
+vckpg update
+vckpg install polyhook2:x86-windows-static
+vckpg install gumbo:x86-windows-static
+```
 
 Once finished, the plugin file `mswsock.dll` will appear in the `Release` folder. 
-You have to compile in release mode otherwise the datastructures of the standard library will not align correctly.
+You have to compile in release mode otherwise the data structures of the standard library will not align correctly.
 
 ## License
 

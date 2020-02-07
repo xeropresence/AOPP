@@ -1,5 +1,5 @@
 #include "AutoOpenTextPatch.h"
-#include <headers/CapstoneDisassembler.hpp>
+#include <polyhook2/CapstoneDisassembler.hpp>
 #include "PatternFinder.h"
 
 
@@ -120,7 +120,7 @@ void search_for_links(GumboNode* node, int depth)
 			return;
 		}
 	}
-
+	
 	GumboVector* children = &node->v.element.children;
 	for (unsigned int i = 0; i < children->length; ++i)
 	{

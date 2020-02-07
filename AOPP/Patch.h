@@ -3,7 +3,7 @@
 #include <utility>
 
 
-#include "headers/Detour/x86Detour.hpp"
+#include "polyhook2//Detour/x86Detour.hpp"
 
 struct hookData
 {

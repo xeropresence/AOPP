@@ -1,8 +1,8 @@
 #include "PatchManager.h"
 
 #include <Windows.h>
-#include <headers/Detour/x86Detour.hpp>
-#include <headers/CapstoneDisassembler.hpp>
+#include <polyhook2/Detour/x86Detour.hpp>
+#include <polyhook2/CapstoneDisassembler.hpp>
 #include "AutoRunPatch.h"
 #include "FramecapPatch.h"
 #include "NumpadTypePatch.h"
