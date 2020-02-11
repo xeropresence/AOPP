@@ -13,7 +13,17 @@ Patch to fix various bugs and add quality of life improvements to the game. Sinc
 * When interacting with ingame help bots automatically open the text responses they send you
   * Demo here (https://i.imgur.com/8MfB3w0.mp4)
   * Only opens text links when the last message you sent was to the bot
-
+* Tab targeting filter
+  * The following units are no longer tab targetable
+    *	Unicorn Service Tower Alpha
+    * Unicorn Service Tower Delta
+    * Unicorn Service Tower Gamma
+    * Rookie Alien Hunter
+    * Altar of Torture
+    * Altar of Purification
+    * Guardian Spirit of Purification
+* GMI Improvements
+  * You can now use commas when withdrawing money, placing buy orders, and placing sell orders.
 
 ## Bugs Fixed
 
@@ -41,8 +51,6 @@ Patch to fix various bugs and add quality of life improvements to the game. Sinc
 * Improve Map crash logic
   * Currently the patcher launches a copy of the AnarchyOnline.exe that is created in the appdata folder so that the checksum error does not occur when running multiple copies of AO
   
-* Tab targeting filter
-  * It'd be nice to filter out targets that would instantly kill you. Spririts in inf missions, towers in sector 35
   
 * Have xp bar show progress to next research target when research is set to 100%
 
