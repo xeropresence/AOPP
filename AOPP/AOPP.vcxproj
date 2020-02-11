@@ -9,6 +9,7 @@
   <ItemGroup>
     <ClInclude Include="AutoOpenTextPatch.h" />
     <ClInclude Include="AutoRunPatch.h" />
+    <ClInclude Include="CommaGMIPatch.h" />
     <ClInclude Include="FlashManager.h" />
     <ClInclude Include="FlashOnMessagePatch.h" />
     <ClInclude Include="FramecapPatch.h" />
@@ -23,6 +24,7 @@
   <ItemGroup>
     <ClCompile Include="AutoOpenTextPatch.cpp" />
     <ClCompile Include="AutoRunPatch.cpp" />
+    <ClCompile Include="CommaGMIPatch.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="FlashManager.cpp" />
     <ClCompile Include="FlashOnMessagePatch.cpp" />
