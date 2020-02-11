@@ -60,6 +60,9 @@
     <ClInclude Include="CommaGMIPatch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TabFilterPatch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -102,6 +105,9 @@
       <Filter>Source Files\Patches</Filter>
     </ClCompile>
     <ClCompile Include="CommaGMIPatch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TabFilterPatch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

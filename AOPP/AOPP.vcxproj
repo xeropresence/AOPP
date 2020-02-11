@@ -19,6 +19,7 @@
     <ClInclude Include="Patch.h" />
     <ClInclude Include="PatchManager.h" />
     <ClInclude Include="PatternFinder.h" />
+    <ClInclude Include="TabFilterPatch.h" />
     <ClInclude Include="XButtonDoubleClickPatch.h" />
   </ItemGroup>
   <ItemGroup>
@@ -35,6 +36,7 @@
     <ClCompile Include="Patch.cpp" />
     <ClCompile Include="PatchManager.cpp" />
     <ClCompile Include="PatternFinder.cpp" />
+    <ClCompile Include="TabFilterPatch.cpp" />
     <ClCompile Include="XButtonDoubleClickPatch.cpp" />
   </ItemGroup>
   <ItemGroup>
