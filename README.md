@@ -45,15 +45,13 @@ Patch to fix various bugs and add quality of life improvements to the game. Sinc
   
 * Logging
   * Currently there is no logging so if something doesn't work right there's no way to know what went wrong
+  
 * Configuration
   * Currently there is no way to configure which patches you want enabled or disabled
   * Considering adding a / command or just having a ini file that you can edit and have the results applied in realtime
   
 * Improve Map crash logic
   * Currently the patcher launches a copy of the AnarchyOnline.exe that is created in the appdata folder so that the checksum error does not occur when running multiple copies of AO
-  
-* Tab targeting filter
-  * It'd be nice to filter out targets that would instantly kill you. Spririts in inf missions, towers in sector 35
   
 * Have xp bar show progress to next research target when research is set to 100%
 
