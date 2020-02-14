@@ -13,6 +13,17 @@ Patch to fix various bugs and add quality of life improvements to the game. Sinc
 * When interacting with ingame help bots automatically open the text responses they send you
   * Demo here (https://i.imgur.com/8MfB3w0.mp4)
   * Only opens text links when the last message you sent was to the bot
+* Tab targeting filter
+  * The following units are no longer tab targetable
+    *	Unicorn Service Tower Alpha
+    * Unicorn Service Tower Delta
+    * Unicorn Service Tower Gamma
+    * Rookie Alien Hunter
+    * Altar of Torture
+    * Altar of Purification
+    * Guardian Spirit of Purification
+* GMI Improvements
+  * You can now use commas when withdrawing money, placing buy orders, and placing sell orders.
 * Bots will no longer appear in your reply list, /r and shift+r have a use again
 
 ## Bugs Fixed
