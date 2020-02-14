@@ -10,6 +10,7 @@
     <ClInclude Include="AutoOpenTextPatch.h" />
     <ClInclude Include="AutoRunPatch.h" />
     <ClInclude Include="CommaGMIPatch.h" />
+    <ClInclude Include="DataTypes.h" />
     <ClInclude Include="FlashManager.h" />
     <ClInclude Include="FlashOnMessagePatch.h" />
     <ClInclude Include="FramecapPatch.h" />
@@ -19,6 +20,7 @@
     <ClInclude Include="Patch.h" />
     <ClInclude Include="PatchManager.h" />
     <ClInclude Include="PatternFinder.h" />
+    <ClInclude Include="SmartReplyPatch.h" />
     <ClInclude Include="TabFilterPatch.h" />
     <ClInclude Include="XButtonDoubleClickPatch.h" />
   </ItemGroup>
@@ -36,6 +38,7 @@
     <ClCompile Include="Patch.cpp" />
     <ClCompile Include="PatchManager.cpp" />
     <ClCompile Include="PatternFinder.cpp" />
+    <ClCompile Include="SmartReplyPatch.cpp" />
     <ClCompile Include="TabFilterPatch.cpp" />
     <ClCompile Include="XButtonDoubleClickPatch.cpp" />
   </ItemGroup>

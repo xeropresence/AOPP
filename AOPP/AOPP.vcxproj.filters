@@ -57,10 +57,16 @@
     <ClInclude Include="AutoOpenTextPatch.h">
       <Filter>Header Files\Patches</Filter>
     </ClInclude>
-    <ClInclude Include="CommaGMIPatch.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="TabFilterPatch.h">
+      <Filter>Header Files\Patches</Filter>
+    </ClInclude>
+    <ClInclude Include="SmartReplyPatch.h">
+      <Filter>Header Files\Patches</Filter>
+    </ClInclude>
+    <ClInclude Include="CommaGMIPatch.h">
+      <Filter>Header Files\Patches</Filter>
+    </ClInclude>
+    <ClInclude Include="DataTypes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -104,11 +110,14 @@
     <ClCompile Include="AutoOpenTextPatch.cpp">
       <Filter>Source Files\Patches</Filter>
     </ClCompile>
-    <ClCompile Include="CommaGMIPatch.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="TabFilterPatch.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Patches</Filter>
+    </ClCompile>
+    <ClCompile Include="SmartReplyPatch.cpp">
+      <Filter>Source Files\Patches</Filter>
+    </ClCompile>
+    <ClCompile Include="CommaGMIPatch.cpp">
+      <Filter>Source Files\Patches</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

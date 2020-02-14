@@ -1,13 +1,11 @@
 #include "TabFilterPatch.h"
 #include <unordered_set>
 
+#include "DataTypes.h"
+
 hookData* GetCloseTargetHook = nullptr;
 
-struct Identity_t
-{
-	unsigned int Type;
-	unsigned int Key;
-};
+
 
 //
 

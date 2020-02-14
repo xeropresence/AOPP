@@ -12,6 +12,7 @@
 #include "AutoOpenTextPatch.h"
 #include "CommaGMIPatch.h"
 #include "TabFilterPatch.h"
+#include "SmartReplyPatch.h"
 
 #define params DWORD dwExStyle,LPCSTR lpClassName,LPCSTR lpWindowName,DWORD dwStyle,int X,int Y,int nWidth,int nHeight,HWND hWndParent,HMENU hMenu,HINSTANCE hInstance,LPVOID lpParam
 #define params2 dwExStyle, lpClassName, lpWindowName, dwStyle, X, Y, nWidth, nHeight, hWndParent, hMenu, hInstance, lpParam
@@ -46,6 +47,8 @@ PatchManager::PatchManager()
 	Patches.emplace_back(std::make_unique<AutoOpenTextPatch>());
 	Patches.emplace_back(std::make_unique<CommaGMIPatch>());
 	Patches.emplace_back(std::make_unique<TabFilterPatch>());
+	Patches.emplace_back(std::make_unique<SmartReplyPatch>());
+	
 }
 
 

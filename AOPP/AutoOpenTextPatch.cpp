@@ -4,6 +4,7 @@
 
 
 #include "gumbo.h"
+#include "DataTypes.h"
 
 
 std::string lastMessageTarget;
@@ -19,15 +20,12 @@ struct __declspec(align(8)) ChatServerMessageStruct
 	_DWORD dword0;
 	_DWORD dword4;
 	_DWORD dword8;
-	std::string str1;
-	_DWORD dword24;
-	std::string str2;
-	_DWORD dword38;
+	AOString str1;
+	AOString str2;
 	_DWORD dword3C;
 	_DWORD dword40;
 	_DWORD dword44;
-	std::string str3;
-	_DWORD dword54;
+	AOString str3;
 	_DWORD dword58;
 	_DWORD dword5c;
 	_DWORD dword60;
@@ -76,7 +74,7 @@ __declspec(noinline) int __fastcall OutgoingPrivateMessageFunc(int a1, void* EDX
 
 	if (a3->str3.length() > 0)
 	{
-		lastMessageTarget.assign(a3->str1);
+		lastMessageTarget.assign(static_cast<const char*>(a3->str1));
 	}
 	
 	return reinterpret_cast<OriginalFunctionType>(outgoingMessageHook->originalTramp)(a1, a2, a3);
@@ -89,13 +87,6 @@ __declspec(noinline) int __fastcall OutgoingPrivateMessageFunc(int a1, void* EDX
 #pragma region incoming message
 hookData * incomingMessageHook = nullptr;
 
-struct IncomingMessage
-{
-public:
-	char pad_0000[12]; //0x0000
-	char Sender[28]; //0x000C
-	std::string Message; //0x0028
-};
 
 
 
@@ -133,7 +124,7 @@ bool icompare_pred(unsigned char a, unsigned char b)
 	return std::tolower(a) == std::tolower(b);
 }
 
-bool icompare(std::string const& a, std::string const& b)
+bool icompare(const std::string & a, const std::string & b)
 {
 	if (a.length() == b.length()) 
 	{
@@ -142,14 +133,14 @@ bool icompare(std::string const& a, std::string const& b)
 	return false;
 }
 
-__declspec(noinline) static void  __fastcall privmessagefunc(int a1, void* EDX, IncomingMessage* a2)
+__declspec(noinline) static void  __fastcall privmessagefunc(int a1, void* EDX, PrivateMessage_t* a2)
 {
-	typedef void(__thiscall* OriginalFunctionType)(int, IncomingMessage*);
+	typedef void(__thiscall* OriginalFunctionType)(int, PrivateMessage_t*);
 	
 	if (icompare(lastMessageTarget ,a2->Sender))
 	{
 		lastMessageTarget = "";
-		GumboOutput* output = gumbo_parse(a2->Message.c_str());
+		GumboOutput* output = gumbo_parse(a2->Message);
 		search_for_links(output->root, 0);
 		gumbo_destroy_output(&kGumboDefaultOptions, output);
 	}
