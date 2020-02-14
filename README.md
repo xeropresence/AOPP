@@ -91,8 +91,7 @@ These instructions are only relevant to you if you want to modify the plugin. To
 * Use vcpkg (https://github.com/microsoft/vcpkg) to install the required libraries
 ```
 vckpg update
-vckpg install polyhook2:x86-windows-static
-vckpg install gumbo:x86-windows-static
+vckpg install polyhook2:x86-windows-static gumbo:x86-windows-static
 ```
 
 Once finished, the plugin file `mswsock.dll` will appear in the `Release` folder. 
