@@ -13,7 +13,7 @@ Patch to fix various bugs and add quality of life improvements to the game. Sinc
 * When interacting with ingame help bots automatically open the text responses they send you
   * Demo here (https://i.imgur.com/8MfB3w0.mp4)
   * Only opens text links when the last message you sent was to the bot
-
+* Bots will no longer appear in your reply list, /r and shift+r have a use again
 
 ## Bugs Fixed
 
