@@ -71,7 +71,7 @@ char* HttpStreamParser__DoLoopFuncAdder()
 
 	if (pfResults.size() != 1)
 	{
-		std::cout << "CommaGMIPatch failed to find function to hook" << std::endl;
+		spdlog::error("CommaGMIPatch failed to find function to hook");
 		return nullptr;
 	}
 

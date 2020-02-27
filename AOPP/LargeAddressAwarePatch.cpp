@@ -7,6 +7,7 @@
 
 
 #include <shlwapi.h>
+#include "Utils.h"
 namespace fs = std::filesystem;
 
 bool doFunkyStuff = false;
@@ -98,34 +99,41 @@ __declspec(noinline)intptr_t __cdecl funkExecv(const char* FileName, const char*
 
 	if (StrStrIA(FileName, "AnarchyOnline.exe") != nullptr)
 	{
-		//printf("Doing funky\n");
-		TCHAR szPath[MAX_PATH];
-		if (SUCCEEDED(SHGetFolderPath(NULL, CSIDL_APPDATA, NULL,0, szPath)))
+
+		auto p = Utils::AppPath();
+		if (!p.empty())
 		{
-			//printf("appending path\n");
-			PathAppend(szPath, L"AOPP");
-			std::filesystem::path p(szPath);
-			if (!exists(p))
-			{
-				create_directories(p);
-			}
+
 
 			if (exists(p))
 			{
 				auto exe = p / "AnarchyOnline.exe";
+
+				spdlog::info("Copying AnarchyOnline.exe to {}", exe.string());
+
+				
 				std::error_code ec;
 				std::filesystem::copy(FileName, exe,std::filesystem::copy_options::overwrite_existing, ec);
 				SetLAA(exe.string().c_str(), true);
 
-
+				
 				WCHAR   DllPath[MAX_PATH] = { 0 };
 				GetModuleFileNameW((HINSTANCE)&__ImageBase, DllPath, _countof(DllPath));
 
 				auto filename = fs::path(DllPath);
 				
 				auto dll = p / filename.filename();
+
+				spdlog::info("Copying {} to {}", filename.filename().string(), dll.string());
 				
 				std::filesystem::copy(DllPath,dll, std::filesystem::copy_options::overwrite_existing, ec);
+
+				fclose(stdin);
+				fclose(stdout);
+				fclose(stderr);
+
+
+				FreeConsole();
 				
 				return  reinterpret_cast<originalFunctionHeader>(funkyExecvHook.originalTramp)(exe.string().c_str(), Arguments);
 			}

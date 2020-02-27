@@ -23,7 +23,7 @@ bool XButtonDoubleClickPatch::_ApplyPatch()
 	auto pfResults = pf->FindPattern("C7 45 ? ? ? ? ? EB AE");
 	if (pfResults.size() != 1)
 	{
-		std::cout << "XButtonDoubleClickPatch 1 failed to find the correct address" << std::endl;
+		spdlog::error("XButtonDoubleClickPatch 1 failed to find the correct address");
 		return false;
 	}
 
@@ -34,7 +34,7 @@ bool XButtonDoubleClickPatch::_ApplyPatch()
 
 	if (pfResults.size() != 1)
 	{
-		std::cout << "XButtonDoubleClickPatch 2 failed to find the correct address" << std::endl;
+		spdlog::error("XButtonDoubleClickPatch 2 failed to find the correct address");
 		return false;
 	}
 

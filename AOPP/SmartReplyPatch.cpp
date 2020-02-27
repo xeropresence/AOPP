@@ -64,7 +64,7 @@ bool SmartReplyPatch::_ApplyPatch()
 
 	if (pfResults.size() != 1)
 	{
-		std::cout << "SmartReplyPatch failed to find function to hook" << std::endl;
+		spdlog::error("SmartReplyPatch failed to find function to hook");
 		return false;
 	}
 

@@ -55,7 +55,7 @@ char * SendPrivateMessageFuncAdder()
 
 	if (pfResults.size() != 1)
 	{
-		std::cout << "AutoOpenTextPatch failed to find function to hook" << std::endl;
+		spdlog::error("AutoOpenTextPatch failed to find function to hook");
 		return nullptr;
 	}
 

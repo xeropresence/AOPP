@@ -1,4 +1,5 @@
 #pragma once
+#include <functional>
 #include <string>
 #include <vector>
 
@@ -9,6 +10,9 @@ public:
 	PatternFinder(const std::string& module);
 	[[nodiscard]] std::vector<intptr_t> FindPattern(const std::string& pattern) const;
 
+	
+	[[nodiscard]] std::vector<intptr_t> FindPattern(const std::string& pattern, const std::function<intptr_t(intptr_t)>&
+	                                                visitor) const;
 
 private:
 	int _baseAddress = 0;

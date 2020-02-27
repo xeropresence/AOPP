@@ -13,6 +13,15 @@
 #include "CommaGMIPatch.h"
 #include "TabFilterPatch.h"
 #include "SmartReplyPatch.h"
+#include "Utils.h"
+
+#include <fstream>
+#include <Psapi.h>
+
+
+#include "ConfigurationHolder.h"
+#include "LargeAddressAwarePatch.h"
+#include "ViewDistancePatch.h"
 
 #define params DWORD dwExStyle,LPCSTR lpClassName,LPCSTR lpWindowName,DWORD dwStyle,int X,int Y,int nWidth,int nHeight,HWND hWndParent,HMENU hMenu,HINSTANCE hInstance,LPVOID lpParam
 #define params2 dwExStyle, lpClassName, lpWindowName, dwStyle, X, Y, nWidth, nHeight, hWndParent, hMenu, hInstance, lpParam
@@ -23,11 +32,33 @@ std::atomic_flag applied = ATOMIC_FLAG_INIT;
 PLH::x86Detour * detour;
 uint64_t originalTramp;
 
-std::vector<std::unique_ptr<Patch>> Patches;
+
+bool _initialized = false;
+bool PatchManager::initialized()
+{
+	return _initialized;
+}
+
 PatchManager::PatchManager()
 {
 	PLH::CapstoneDisassembler dis(PLH::Mode::x86);
+	Configuration = std::make_unique<ConfigurationHolder>();
 
+	CHAR buff[32];
+	
+	GetModuleBaseNameA(GetCurrentProcess(), nullptr, buff, 32);
+	spdlog::info(buff);
+	if (_strcmpi(buff, "Anarchy.exe") == 0)
+	{
+		const auto LAA = std::make_unique<LargeAddressAwarePatch>();
+		LAA->Initialize(Configuration->config);
+		Configuration->Save();
+
+		if (LAA->enabled())
+			LAA->ApplyPatch();
+		
+		return;
+	}
 	
 	const char* CreateWindowExW = Patch::GetAddress<const char*>("User32.dll", "CreateWindowExW");
 	detour = new PLH::x86Detour(reinterpret_cast<const char*>(CreateWindowExW), reinterpret_cast<char*>(&CreateWindowHook), &originalTramp, dis);
@@ -36,8 +67,11 @@ PatchManager::PatchManager()
 
 	if (!result)
 	{
-		std::cout << "Failed to apply hook " << PLH::ErrorLog::singleton().pop().msg << std::endl;
+		spdlog::error("Failed to apply hook initial hook {}", PLH::ErrorLog::singleton().pop().msg);
 	}
+
+
+	
 
 	Patches.emplace_back(std::make_unique<AutoRunPatch>());
 	Patches.emplace_back(std::make_unique<FramecapPatch>());
@@ -48,7 +82,19 @@ PatchManager::PatchManager()
 	Patches.emplace_back(std::make_unique<CommaGMIPatch>());
 	Patches.emplace_back(std::make_unique<TabFilterPatch>());
 	Patches.emplace_back(std::make_unique<SmartReplyPatch>());
+	Patches.emplace_back(std::make_unique<ViewDistancePatch>());
 	
+
+	_CommandInterpreter = std::make_unique<CommandInterpreter>();
+	
+	
+	
+	for (auto&& patch : Patches)
+	{
+		patch->Initialize(Configuration->config);
+	}
+
+	Configuration->Save();
 }
 
 
@@ -58,14 +104,21 @@ __declspec(noinline) HWND __stdcall CreateWindowHook(params)
 {
 	typedef HWND(__stdcall* fnction)(params);
 	const auto result = reinterpret_cast<fnction>(originalTramp)(params2);
-
+	
 	if (!applied.test_and_set())
 	{
-
-		for(auto && patch  : Patches)
+		for(auto && patch  : PatchManager::getInstance().Patches)
 		{
-			patch->ApplyPatch();
+			if (patch->enabled())
+			{
+				if (patch->ApplyPatch())
+				{
+					
+				}
+			}
+				
 		}
+		_initialized = true;
 		
 		detour->unHook();
 		delete detour;

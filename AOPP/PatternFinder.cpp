@@ -82,6 +82,20 @@ std::vector<intptr_t> PatternFinder::FindPattern(const std::string& pattern) con
 	return res;
 }
 
+std::vector<intptr_t> PatternFinder::FindPattern(const std::string& pattern, const std::function<intptr_t(intptr_t)>&
+                                                 visitor) const
+{
+	std::vector<intptr_t> results;
+
+	auto res = Find(HexToBytes(pattern));
+	for (int& re : res)
+	{
+		re = re + _baseAddress;
+		re = visitor(re);
+	}
+	return res;
+}
+
 std::vector<intptr_t> PatternFinder::Find(std::vector<int> &&  pattern) const
 {
 	std::vector<intptr_t> ret;
