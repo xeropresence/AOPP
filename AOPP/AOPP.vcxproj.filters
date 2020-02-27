@@ -72,9 +72,6 @@
     <ClInclude Include="Utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SimpleIni.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ConfigurationHolder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
