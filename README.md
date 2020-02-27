@@ -25,6 +25,8 @@ Patch to fix various bugs and add quality of life improvements to the game. Sinc
 * GMI Improvements
   * You can now use commas when withdrawing money, placing buy orders, and placing sell orders.
 * Bots will no longer appear in your reply list, /r and shift+r have a use again
+* Increased view distance (defaults to 2000 up from 1000, off by default)
+* `/aopp` ingame slash command with tab completion for parameters and patches
 
 ## Bugs Fixed
 
@@ -42,14 +44,7 @@ Patch to fix various bugs and add quality of life improvements to the game. Sinc
   * I'd like to add hotkeys for interacting with the trade skill window, move item to slot1, move item to slot2, complete tradeskill, clear tradeskill
   * Move item to backpack hotkey, move currently picked up item to backpack
   * Anything that would reduce stress caused by repetitive motion really
-  
-* Logging
-  * Currently there is no logging so if something doesn't work right there's no way to know what went wrong
-  
-* Configuration
-  * Currently there is no way to configure which patches you want enabled or disabled
-  * Considering adding a / command or just having a ini file that you can edit and have the results applied in realtime
-  
+
 * Improve Map crash logic
   * Currently the patcher launches a copy of the AnarchyOnline.exe that is created in the appdata folder so that the checksum error does not occur when running multiple copies of AO
   
@@ -80,7 +75,12 @@ To uninstall simply delete `mswsock.dll`.
 
 ## Troubleshooting
 
-More details coming soon.
+Log files can be found in `%appdata%\AOPP\Logs`
+
+Configuration file is `%appdata%\AOPP\config.json`
+
+First two things to check are if the vc++ redistributable is installed, second is if the dll has been "blocked" by windows.
+
 
 ## How to build
 
@@ -91,7 +91,7 @@ These instructions are only relevant to you if you want to modify the plugin. To
 * Use vcpkg (https://github.com/microsoft/vcpkg) to install the required libraries
 ```
 vckpg update
-vckpg install polyhook2:x86-windows-static gumbo:x86-windows-static
+vckpg install polyhook2:x86-windows-static gumbo:x86-windows-static spdlog:x86-windows-static nlohmann-json:x86-windows-static
 ```
 
 Once finished, the plugin file `mswsock.dll` will appear in the `Release` folder. 
