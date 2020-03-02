@@ -23,9 +23,9 @@
 #include "LargeAddressAwarePatch.h"
 #include "ViewDistancePatch.h"
 
-#define params DWORD dwExStyle,LPCSTR lpClassName,LPCSTR lpWindowName,DWORD dwStyle,int X,int Y,int nWidth,int nHeight,HWND hWndParent,HMENU hMenu,HINSTANCE hInstance,LPVOID lpParam
-#define params2 dwExStyle, lpClassName, lpWindowName, dwStyle, X, Y, nWidth, nHeight, hWndParent, hMenu, hInstance, lpParam
-__declspec(noinline) HWND  __stdcall CreateWindowHook(params);
+#define params HWND a1, int a2
+#define params2 a1, a2
+__declspec(noinline) HWND  __stdcall ShowWindowHook(params);
 
 std::atomic_flag applied = ATOMIC_FLAG_INIT;
 
@@ -60,8 +60,8 @@ PatchManager::PatchManager()
 		return;
 	}
 	
-	const char* CreateWindowExW = Patch::GetAddress<const char*>("User32.dll", "CreateWindowExW");
-	detour = new PLH::x86Detour(reinterpret_cast<const char*>(CreateWindowExW), reinterpret_cast<char*>(&CreateWindowHook), &originalTramp, dis);
+	const char* ShowWindow = Patch::GetAddress<const char*>("User32.dll", "ShowWindow");
+	detour = new PLH::x86Detour(reinterpret_cast<const char*>(ShowWindow), reinterpret_cast<char*>(&ShowWindowHook), &originalTramp, dis);
 
 	const auto result = detour->hook();
 
@@ -100,7 +100,7 @@ PatchManager::PatchManager()
 
 
 
-__declspec(noinline) HWND __stdcall CreateWindowHook(params)
+__declspec(noinline) HWND __stdcall ShowWindowHook(params)
 {
 	typedef HWND(__stdcall* fnction)(params);
 	const auto result = reinterpret_cast<fnction>(originalTramp)(params2);
