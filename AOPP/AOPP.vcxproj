@@ -22,7 +22,6 @@
     <ClInclude Include="Patch.h" />
     <ClInclude Include="PatchManager.h" />
     <ClInclude Include="PatternFinder.h" />
-    <ClInclude Include="SimpleIni.h" />
     <ClInclude Include="SmartReplyPatch.h" />
     <ClInclude Include="TabFilterPatch.h" />
     <ClInclude Include="Utils.h" />
