@@ -60,7 +60,7 @@ __declspec(noinline) int __fastcall GetCloseTarget(int a1, void* EDX, Identity_t
 	typedef int(__thiscall* OriginalFunctionType)(int, Identity_t*, int, int);
 	char* name = nullptr;
 	Identity_t starting{};
-
+	Identity_t lastKey{ 0xFFFFFFFF,0xFFFFFFFF };
 	memcpy(&starting, a2, sizeof(Identity_t));
 
 	int result;
@@ -73,6 +73,14 @@ __declspec(noinline) int __fastcall GetCloseTarget(int a1, void* EDX, Identity_t
 		{
 			break;
 		}
+
+		if (lastKey.Type != 0xFFFFFFFF && lastKey.Key == a2->Key)
+		{
+			memcpy(a2, &starting, sizeof(Identity_t));
+			break;
+		}
+
+		memcpy(&lastKey, a2, sizeof(Identity_t));
 	}
 
 	return result;
