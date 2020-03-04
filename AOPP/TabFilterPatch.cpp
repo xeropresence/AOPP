@@ -58,29 +58,30 @@ std::unordered_set<std::string> stuff_that_ruins_your_day
 __declspec(noinline) int __fastcall GetCloseTarget(int a1, void* EDX, Identity_t* a2, bool forward, bool friendly)
 {
 	typedef int(__thiscall* OriginalFunctionType)(int, Identity_t*, int, int);
-	char* name = nullptr;
 	Identity_t starting{};
-	Identity_t lastKey{ 0xFFFFFFFF,0xFFFFFFFF };
 	memcpy(&starting, a2, sizeof(Identity_t));
 
+	std::unordered_set<unsigned> testedKeys;
+	
 	int result;
 	while(true)
 	{
 		result = reinterpret_cast<OriginalFunctionType>(GetCloseTargetHook->originalTramp)(a1, a2, forward, friendly);
 
-		name = getName(a2);
+		const auto name = getName(a2);
 		if (name == nullptr || starting.Key == a2->Key ||  stuff_that_ruins_your_day.find(name) == stuff_that_ruins_your_day.end())
 		{
 			break;
 		}
 
-		if (lastKey.Type != 0xFFFFFFFF && lastKey.Key == a2->Key)
+		if (testedKeys.find(a2->Key) != testedKeys.end())
 		{
 			memcpy(a2, &starting, sizeof(Identity_t));
 			break;
 		}
+			
 
-		memcpy(&lastKey, a2, sizeof(Identity_t));
+		testedKeys.emplace(a2->Key);
 	}
 
 	return result;
